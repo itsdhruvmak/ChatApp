@@ -1,21 +1,20 @@
-import smtplib
-from email.message import EmailMessage
+import resend
 
 from app.core.config import settings
 
+resend.api_key = settings.RESEND_API_KEY
+
+
 def send_otp_email(
         recipient: str,
-        otp:str
+        otp: str
 ) -> None:
 
-    message=EmailMessage()
-
-    message["Subject"] = "Chat App email verification"
-    message["From"] = settings.SMTP_USERNAME
-    message["To"] = recipient
-
-    message.set_content(
-        f"""
+    resend.Emails.send({
+        "from": settings.RESEND_FROM_EMAIL,
+        "to": [recipient],
+        "subject": "Chat App email verification",
+        "text": f"""
 Hello,
 Your chat app verification code is:
 
@@ -28,18 +27,4 @@ If you did not request this code, please ignore this email.
 Regards,
 Chat App
 """
-    )
-
-    with smtplib.SMTP(
-        settings.SMTP_HOST,
-        settings.SMTP_PORT
-    ) as server:
-
-        server.starttls()
-
-        server.login(
-            settings.SMTP_USERNAME,
-            settings.SMTP_PASSWORD
-        )
-
-        server.send_message(message)
+    })
