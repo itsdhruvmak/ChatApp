@@ -8,7 +8,6 @@ engine = create_engine(
     echo=True
 )
 
-
 SessionLocal = sessionmaker(
     bind=engine,
     autoflush=False,
