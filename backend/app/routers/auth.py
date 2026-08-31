@@ -115,6 +115,7 @@ def verify_otp(
     db.commit()
 
     token = create_access_token(user.id)
+    print(f"VERIFY-OTP RESPONSE TOKEN: {token}")  # TEMP DEBUG
 
     return {
         "message": "Email verified successfully.",
