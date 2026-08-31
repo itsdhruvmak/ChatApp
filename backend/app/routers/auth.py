@@ -58,11 +58,17 @@ def verify_otp(
     data: verifyOTPRequest,
     db: Session = Depends(get_db)
 ):
+
     user = db.scalar(
-        select(User).where(
-            User.email == data.email
-        )
-    )
+    select(User)
+    .where(User.email == data.email)
+    .order_by(User.created_at.desc())
+)
+    # user = db.scalar(
+    #     select(User).where(
+    #         User.email == data.email
+    #     )
+    # )
 
     if not user:
         raise HTTPException(
