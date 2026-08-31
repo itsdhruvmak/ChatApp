@@ -31,6 +31,7 @@ export default function LoginForm() {
 
             router.push("/chat");
         } catch (error) {
+            console.error("LOGIN ERROR:", error);  // TEMP DEBUG
             setError(
                 error.response?.data?.detail ||
                 "Login failed. Please try again."
