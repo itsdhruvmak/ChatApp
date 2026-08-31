@@ -140,14 +140,16 @@ def login(
 ):
     user = db.scalar(
         select(User).where(
-            User.email == data.email
+            # User.email == data.email
+            User.username == data.username
         )
     )
 
     if not user:
         raise HTTPException(
             status_code=401,
-            detail="Invalid Email or Password"
+            # detail="Invalid Email or Password"
+            detail="Invalid Username or Password"
         )
 
     if not verify_password(
@@ -156,7 +158,8 @@ def login(
     ):
         raise HTTPException(
             status_code=401,
-            detail="Invalid Email or Password"
+            # detail="Invalid Email or Password"
+            detail="Invalid Username or Password"
         )
 
     if not user.is_verified:

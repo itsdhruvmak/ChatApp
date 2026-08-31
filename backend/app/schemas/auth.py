@@ -10,7 +10,8 @@ class verifyOTPRequest(BaseModel):
     otp: str = Field(min_length=6, max_length=6)
 
 class loginRequest(BaseModel):
-    email: EmailStr
+    username: str
+    # email: EmailStr
     password: str
 
 class TokenResponse(BaseModel):

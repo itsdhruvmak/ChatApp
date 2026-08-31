@@ -10,7 +10,8 @@ export default function LoginForm() {
     const router = useRouter()
     const { login } = useAuth()
 
-    const [email, setEmail] = useState("")
+    // const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     const [error, setError] = useState("")
@@ -23,7 +24,8 @@ export default function LoginForm() {
         setLoading(true)
 
         try {
-            const data = await loginUser(email, password);
+            // const data = await loginUser(email, password);
+            const data = await loginUser(username, password);
 
             await login(data.access_token);
 
@@ -76,7 +78,7 @@ export default function LoginForm() {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {/* Email Field */}
-                        <div className="space-y-1.5">
+                        {/* <div className="space-y-1.5">
                             <label className="text-xs font-medium text-neutral-300">
                                 Email
                             </label>
@@ -88,7 +90,22 @@ export default function LoginForm() {
                                 required
                                 className="w-full rounded-xl border border-neutral-800 bg-neutral-950/60 px-4 py-3 text-sm text-white outline-none transition-all placeholder:text-neutral-600 focus:border-neutral-600 focus:bg-neutral-950 focus:ring-2 focus:ring-neutral-700/50"
                             />
-                        </div>
+                        </div> */}
+
+                        {/* Username Field */}
+<div className="space-y-1.5">
+    <label className="text-xs font-medium text-neutral-300">
+        Username
+    </label>
+    <input
+        type="text"
+        placeholder="yourusername"
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+        required
+        className="w-full rounded-xl border border-neutral-800 bg-neutral-950/60 px-4 py-3 text-sm text-white outline-none transition-all placeholder:text-neutral-600 focus:border-neutral-600 focus:bg-neutral-950 focus:ring-2 focus:ring-neutral-700/50"
+    />
+</div>
 
                         {/* Password Field */}
                         <div className="space-y-1.5">
