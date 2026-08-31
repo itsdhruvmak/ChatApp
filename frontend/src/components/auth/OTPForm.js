@@ -32,6 +32,7 @@ export default function VerifyEmailForm() {
 
         try {
             const data = await verifyOTP(email, otp);
+            console.log("RAW ACCESS TOKEN:", JSON.stringify(data.access_token));
 
             // Backend returns JWT after OTP verification
             await login(data.access_token);
